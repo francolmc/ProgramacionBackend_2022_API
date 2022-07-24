@@ -21,5 +21,5 @@ public interface Post {
     public Set<Like> getLikes();
     public void setLikes(Set<Like> likes);
 
-    public Long getCountLikes();
+    public Integer getCountLikes();
 }

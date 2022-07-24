@@ -9,18 +9,18 @@ public class UserDomain {
 
     public User create(User user) {
         // TODO: Encriptar contraseña
-        return this._userRepository.create(user);
+        return this._userRepository.saveUser(user);
     }
 
     public User update(String email, User user) {
-        User updateUser = this._userRepository.getUserByEmail(email);
+        User updateUser = this.getUserByEmail(email);
         updateUser.setFirstName(user.getFirstName());
         updateUser.setLastName(user.getLastName());
-        return this._userRepository.update(email, updateUser);
+        return this._userRepository.saveUser(updateUser);
     }
 
     public User getUserByEmail(String email) {
-        return this._userRepository.getUserByEmail(email);
+        return this._userRepository.findUserByEmail(email);
     }
 
     public User changePassword(String email, String newPassword) {

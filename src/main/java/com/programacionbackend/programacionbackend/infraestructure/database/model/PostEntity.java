@@ -36,8 +36,6 @@ public class PostEntity implements Post {
     @OneToMany(mappedBy = "like", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Like> likes;
 
-    private Long countLikes;
-
     @Override
     public Long getId() {
         return this.id;
@@ -89,12 +87,8 @@ public class PostEntity implements Post {
     }
 
     @Override
-    public Long getCountLikes() {
-        return this.countLikes;
-    }
-
-    public void setCountLikes(Long value) {
-        this.countLikes = value;
+    public Integer getCountLikes() {
+        return this.likes.size();
     }
 
 }
