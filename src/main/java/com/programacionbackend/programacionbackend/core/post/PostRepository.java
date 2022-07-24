@@ -1,13 +1,11 @@
 package com.programacionbackend.programacionbackend.core.post;
 
-import java.util.List;
+import java.util.Set;
 
 public interface PostRepository {
-    public Post create(Post post);
-    public Post update(Integer id, Post post);
-    public Boolean delete(Integer id);
-    public List<Post> getPostsByUser(String email);
-    public List<Post> getAllPosts();
-    public Post getPostById(Integer id);
-    public List<Post> getAllPostsWithCountLikes();
+    public Post savePost(Post post);
+    public void deleteById(Long id);
+    public Set<Post> findPostsByUserEmail(String email);
+    public Set<Post> findAllPosts();
+    public Post findPostById(Long id);
 }

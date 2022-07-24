@@ -1,6 +1,6 @@
 package com.programacionbackend.programacionbackend.core.post;
 
-import java.util.List;
+import java.util.Set;
 
 import com.programacionbackend.programacionbackend.core.user.User;
 import com.programacionbackend.programacionbackend.core.user.UserRepository;
@@ -15,42 +15,38 @@ public class PostDomain {
     }
 
     public Post create(String email, Post post) {
-        User user = this._userRepository.getUserByEmail(email);
+        User user = this._userRepository.findUserByEmail(email);
         post.setUser(user);
-        return this._postRepository.create(post);
+        return this._postRepository.savePost(post);
     }
 
-    public Post update(String ownerEmail, Integer id, Post post) {
-        Post originalPost = this._postRepository.getPostById(id);
+    public Post update(String ownerEmail, Long id, Post post) {
+        Post originalPost = this.getPostById(id);
         if(originalPost.getUser().getEmail() != ownerEmail) {
             throw new Error("You not have access for modify this post.");
         }
         originalPost.setContent(post.getContent());
         originalPost.setTitle(post.getTitle());
-        return this._postRepository.update(id, originalPost);
+        return this._postRepository.savePost(originalPost);
     }
 
-    public Boolean delete(String ownerEmail, Integer id) {
-        Post originalPost = this._postRepository.getPostById(id);
+    public void delete(String ownerEmail, Long id) {
+        Post originalPost = this.getPostById(id);
         if(originalPost.getUser().getEmail() != ownerEmail) {
             throw new Error("You not have access for delete this post.");
         }
-        return this._postRepository.delete(id);
+        this._postRepository.deleteById(id);
     }
 
-    public List<Post> getPostsByUserEmail(String email) {
-        return this._postRepository.getPostsByUser(email);
+    public Set<Post> getPostsByUserEmail(String email) {
+        return this._postRepository.findPostsByUserEmail(email);
     }
 
-    public Post getPostById(Integer id) {
-        return this._postRepository.getPostById(id);
+    public Post getPostById(Long id) {
+        return this._postRepository.findPostById(id);
     }
 
-    public List<Post> getAllPosts() {
-        return this._postRepository.getAllPosts();
-    }
-
-    public List<Post> getAllPostsWithCountLike() {
-        return this._postRepository.getAllPostsWithCountLikes();
+    public Set<Post> getAllPosts() {
+        return this._postRepository.findAllPosts();
     }
 }
