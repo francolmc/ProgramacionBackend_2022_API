@@ -4,8 +4,8 @@ import com.programacionbackend.programacionbackend.core.post.Post;
 import com.programacionbackend.programacionbackend.core.user.User;
 
 public interface Like {
-    public Integer getId();
-    public void setId(Integer value);
+    public Long getId();
+    public void setId(Long value);
 
     public Boolean getLike();
     public void setLike(Boolean value);
