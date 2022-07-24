@@ -2,9 +2,10 @@ package com.programacionbackend.programacionbackend.core.user;
 
 import java.util.List;
 
-import com.programacionbackend.programacionbackend.core.post.PostEntity;
+import com.programacionbackend.programacionbackend.core.like.Like;
+import com.programacionbackend.programacionbackend.core.post.Post;
 
-public interface UserEntity {
+public interface User {
     public void setId(Integer value);
     public Integer getId();
 
@@ -20,6 +21,9 @@ public interface UserEntity {
     public void setPasswordName(String value);
     public String getPasswordName();
 
-    public List<PostEntity> getPosts();
-    public void setPosts(List<PostEntity> posts);
+    public List<Post> getPosts();
+    public void setPosts(List<Post> posts);
+
+    public List<Like> getLikes();
+    public void setLikes(List<Like> posts);
 }
