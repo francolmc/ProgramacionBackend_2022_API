@@ -7,8 +7,8 @@ public interface Like {
     public Long getId();
     public void setId(Long value);
 
-    public Boolean getLike();
-    public void setLike(Boolean value);
+    public Boolean getHaveLike();
+    public void setHaveLike(Boolean value);
 
     public User getUser();
     public void setUser(User user);

@@ -1,6 +1,6 @@
 package com.programacionbackend.programacionbackend.core.user;
 
-import java.util.Set;
+import java.util.List;
 
 import com.programacionbackend.programacionbackend.core.like.Like;
 import com.programacionbackend.programacionbackend.core.post.Post;
@@ -21,9 +21,9 @@ public interface User {
     public void setPasswordName(String value);
     public String getPasswordName();
 
-    public Set<Post> getPosts();
-    public void setPosts(Set<Post> posts);
+    public List<Post> getPosts();
+    public void setPosts(List<Post> posts);
 
-    public Set<Like> getLikes();
-    public void setLikes(Set<Like> likes);
+    public List<Like> getLikes();
+    public void setLikes(List<Like> likes);
 }

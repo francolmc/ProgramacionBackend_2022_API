@@ -1,6 +1,7 @@
 package com.programacionbackend.programacionbackend.infraestructure.database.model;
 
-import java.util.Set;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -31,10 +32,10 @@ public class PostEntity implements Post {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private User user;
+    private UserEntity user;
 
-    @OneToMany(mappedBy = "like", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Like> likes;
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<LikeEntity> likes;
 
     @Override
     public Long getId() {
@@ -73,22 +74,21 @@ public class PostEntity implements Post {
 
     @Override
     public void setUser(User user) {
-        this.user = user;
+        this.user = (UserEntity) user;
     }
 
     @Override
-    public Set<Like> getLikes() {
-        return this.likes;
+    public List<Like> getLikes() {
+        return this.likes.stream().map(e -> (Like) e).collect(Collectors.toList());
     }
 
     @Override
-    public void setLikes(Set<Like> likes) {
-        this.likes = likes;
+    public void setLikes(List<Like> likes) {
+        this.likes = likes.stream().map(e -> (LikeEntity) e).collect(Collectors.toList());
     }
 
     @Override
     public Integer getCountLikes() {
         return this.likes.size();
     }
-
 }

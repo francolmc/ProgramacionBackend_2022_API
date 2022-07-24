@@ -1,6 +1,6 @@
 package com.programacionbackend.programacionbackend.core.user;
 
-public interface UserRepository {
-    public User saveUser(User user);
-    public User findUserByEmail(String email);
+public interface UserRepository <T extends User> {
+    public T save(T user);
+    public T findUserByEmail(String email);
 }

@@ -1,37 +1,37 @@
 package com.programacionbackend.programacionbackend.core.user;
 
-public class UserDomain {
-    private UserRepository _userRepository;
+public class UserDomain <U extends User> {
+    private UserRepository<U> _userRepository;
 
-    public UserDomain(UserRepository userRepository) {
+    public UserDomain(UserRepository<U> userRepository) {
         this._userRepository = userRepository;
     }
 
-    public User create(User user) {
+    public U create(U user) {
         // TODO: Encriptar contraseña
-        return this._userRepository.saveUser(user);
+        return this._userRepository.save(user);
     }
 
-    public User update(String email, User user) {
-        User updateUser = this.getUserByEmail(email);
+    public U update(String email, U user) {
+        U updateUser = this.getUserByEmail(email);
         updateUser.setFirstName(user.getFirstName());
         updateUser.setLastName(user.getLastName());
-        return this._userRepository.saveUser(updateUser);
+        return this._userRepository.save(updateUser);
     }
 
-    public User getUserByEmail(String email) {
+    public U getUserByEmail(String email) {
         return this._userRepository.findUserByEmail(email);
     }
 
-    public User changePassword(String email, String newPassword) {
-        User user = this.getUserByEmail(email);
+    public U changePassword(String email, String newPassword) {
+        U user = this.getUserByEmail(email);
         // TODO: Encriptar contraseña
         user.setPasswordName(newPassword);
         return this.update(email, user);
     }
 
     public Boolean isValidUserPassword(String email, String password) {
-        User user = this.getUserByEmail(email);
+        U user = this.getUserByEmail(email);
         if(user == null) return false;
         // TODO: Comparar contraseñas encriptadas
         return user.getPasswordName() == password;

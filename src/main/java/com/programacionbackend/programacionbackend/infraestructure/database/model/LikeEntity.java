@@ -14,20 +14,20 @@ import com.programacionbackend.programacionbackend.core.post.Post;
 import com.programacionbackend.programacionbackend.core.user.User;
 
 @Entity()
-@Table(name = "like")
+@Table(name = "likes")
 public class LikeEntity implements Like {
     @Id()
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false)
-    private Boolean like;
+    private Boolean haveLike;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private User user;
+    private UserEntity user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private Post post;
+    private PostEntity post;
 
     @Override
     public Long getId() {
@@ -40,13 +40,13 @@ public class LikeEntity implements Like {
     }
 
     @Override
-    public Boolean getLike() {
-        return this.like;
+    public Boolean getHaveLike() {
+        return this.haveLike;
     }
 
     @Override
-    public void setLike(Boolean value) {
-        this.like = value;
+    public void setHaveLike(Boolean value) {
+        this.haveLike = value;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class LikeEntity implements Like {
 
     @Override
     public void setUser(User user) {
-        this.user = user;
+        this.user = (UserEntity) user;
     }
 
     @Override
@@ -66,6 +66,6 @@ public class LikeEntity implements Like {
 
     @Override
     public void setPost(Post post) {
-        this.post = post;
+        this.post = (PostEntity) post;
     }
 }

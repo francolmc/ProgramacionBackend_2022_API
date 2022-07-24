@@ -1,11 +1,10 @@
 package com.programacionbackend.programacionbackend.infraestructure.database.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import javax.transaction.Transactional;
 
-import com.programacionbackend.programacionbackend.core.user.User;
-import com.programacionbackend.programacionbackend.core.user.UserRepository;
+import com.programacionbackend.programacionbackend.infraestructure.database.model.UserEntity;
 
-public interface UserEntityJpaRepository extends JpaRepository<User, Long>, UserRepository {
-    public User saveUser(User user);
-    public User findUserByEmail(String email);
+@Transactional()
+public interface UserEntityJpaRepository extends UserEntityBaseJpaRepository<UserEntity> {
+    
 }

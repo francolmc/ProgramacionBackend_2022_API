@@ -1,6 +1,6 @@
 package com.programacionbackend.programacionbackend.core.post;
 
-import java.util.Set;
+import java.util.List;
 
 import com.programacionbackend.programacionbackend.core.like.Like;
 import com.programacionbackend.programacionbackend.core.user.User;
@@ -18,8 +18,8 @@ public interface Post {
     public User getUser();
     public void setUser(User user);
 
-    public Set<Like> getLikes();
-    public void setLikes(Set<Like> likes);
+    public List<Like> getLikes();
+    public void setLikes(List<Like> likes);
 
     public Integer getCountLikes();
 }

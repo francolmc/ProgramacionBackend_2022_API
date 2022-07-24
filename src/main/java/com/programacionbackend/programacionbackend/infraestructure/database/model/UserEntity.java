@@ -1,6 +1,7 @@
 package com.programacionbackend.programacionbackend.infraestructure.database.model;
 
-import java.util.Set;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,11 +36,11 @@ public class UserEntity implements User {
     @Column(length = 160, nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Post> posts;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<PostEntity> posts;
 
-    @OneToMany(mappedBy = "like", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Like> likes;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<LikeEntity> likes;
 
     @Override
     public void setId(Long value) {
@@ -92,22 +93,22 @@ public class UserEntity implements User {
     }
 
     @Override
-    public Set<Post> getPosts() {
-        return this.posts;
+    public List<Post> getPosts() {
+        return this.posts.stream().map(e -> (Post) e).collect(Collectors.toList());
     }
 
     @Override
-    public void setPosts(Set<Post> posts) {
-        this.posts = posts;
+    public void setPosts(List<Post> posts) {
+        this.posts = posts.stream().map(e -> (PostEntity) e).collect(Collectors.toList());
     }
 
     @Override
-    public Set<Like> getLikes() {
-        return this.likes;
+    public List<Like> getLikes() {
+        return this.likes.stream().map(e -> (Like) e).collect(Collectors.toList());
     }
 
     @Override
-    public void setLikes(Set<Like> likes) {
-        this.likes = likes;
+    public void setLikes(List<Like> likes) {
+        this.likes = likes.stream().map(e -> (LikeEntity) e).collect(Collectors.toList());
     }
 }
