@@ -18,8 +18,8 @@ public interface User {
     public void setLastName(String value);
     public String getLastName();
 
-    public void setPasswordName(String value);
-    public String getPasswordName();
+    public void setPassword(String value);
+    public String getPassword();
 
     public List<Post> getPosts();
     public void setPosts(List<Post> posts);

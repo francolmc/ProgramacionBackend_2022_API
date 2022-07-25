@@ -10,11 +10,11 @@ public class LikeDomain <U extends User, P extends Post, L extends Like> {
     private UserRepository<U> _userRepository;
     private PostRepository<P> _postRepository;
 
-    public LikeDomain(LikeRepository<L> likeRepository, UserRepository<U> userRepository, PostRepository<P> postRepository) {
+    /* public LikeDomain(LikeRepository<L> likeRepository, UserRepository<U> userRepository, PostRepository<P> postRepository) {
         this._postRepository = postRepository;
         this._likeRepository = likeRepository;
         this._userRepository = userRepository;
-    }
+    } */
 
     public Boolean putLike(L like, Long postId, String userEmail) {
         U user = this._userRepository.findUserByEmail(userEmail);

@@ -9,10 +9,10 @@ public class PostDomain<P extends Post, U extends User> {
     private PostRepository<P> _postRepository;
     private UserRepository<U> _userRepository;
 
-    public PostDomain(PostRepository<P> postRepository, UserRepository<U> userRepository) {
+    /* public PostDomain(PostRepository<P> postRepository, UserRepository<U> userRepository) {
         this._postRepository = postRepository;
         this._userRepository = userRepository;
-    }
+    } */
 
     public P create(String email, P post) {
         U user = this._userRepository.findUserByEmail(email);

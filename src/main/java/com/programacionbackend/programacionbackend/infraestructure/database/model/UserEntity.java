@@ -1,5 +1,6 @@
 package com.programacionbackend.programacionbackend.infraestructure.database.model;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -83,18 +84,18 @@ public class UserEntity implements User {
     }
 
     @Override
-    public void setPasswordName(String value) {
+    public void setPassword(String value) {
         this.password = value;
     }
 
     @Override
-    public String getPasswordName() {
+    public String getPassword() {
         return this.password;
     }
 
     @Override
     public List<Post> getPosts() {
-        return this.posts.stream().map(e -> (Post) e).collect(Collectors.toList());
+        return this.posts != null ? this.posts.stream().map(e -> (Post) e).collect(Collectors.toList()) : Collections.emptyList();
     }
 
     @Override
@@ -104,7 +105,7 @@ public class UserEntity implements User {
 
     @Override
     public List<Like> getLikes() {
-        return this.likes.stream().map(e -> (Like) e).collect(Collectors.toList());
+        return this.likes != null ? this.likes.stream().map(e -> (Like) e).collect(Collectors.toList()) : Collections.emptyList();
     }
 
     @Override
