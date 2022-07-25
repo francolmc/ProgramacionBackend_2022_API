@@ -8,16 +8,21 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.programacionbackend.programacionbackend.config.JwtTokenUtil;
+import com.programacionbackend.programacionbackend.core.user.User;
+import com.programacionbackend.programacionbackend.infraestructure.database.model.UserEntity;
 import com.programacionbackend.programacionbackend.service.JwtUserDetailsService;
+import com.programacionbackend.programacionbackend.service.UserService;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/api/auth")
 public class JwtAuthenticationController {
 
 	@Autowired
@@ -29,6 +34,9 @@ public class JwtAuthenticationController {
 	@Autowired
 	private JwtUserDetailsService userDetailsService;
 
+    @Autowired
+    private UserService _userService;
+    
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
@@ -51,4 +59,14 @@ public class JwtAuthenticationController {
 			throw new Exception("INVALID_CREDENTIALS", e);
 		}
 	}
+
+    @PostMapping("/register")
+    public ResponseEntity<User> registerUser(@RequestBody CreateUserDto user) {
+        UserEntity u = new UserEntity();
+        u.setEmail(user.email);
+        u.setFirstName(user.firstName);
+        u.setLastName(user.lastName);
+        u.setPassword(user.password);
+        return ResponseEntity.ok(this._userService.create(u));
+    }
 }
