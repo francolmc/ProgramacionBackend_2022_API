@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import com.programacionbackend.programacionbackend.config.CustomPasswordEncoder;
+
 @Component
 public class UserDomain <U extends User> {
     private UserRepository<U> _userRepository;
 
     @Autowired
-    private PasswordEncoder _bcrypEncoder;
+    private CustomPasswordEncoder _bcrypEncoder;
 
     public UserDomain(UserRepository<U> userRepository) {
         this._userRepository = userRepository;
