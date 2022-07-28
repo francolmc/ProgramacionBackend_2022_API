@@ -12,7 +12,7 @@ public class CustomPasswordEncoder implements PasswordEncoder {
     }
     @Override
     public boolean matches(CharSequence plainTextPassword, String passwordInDatabase) {
-        System.out.println(plainTextPassword);
+        System.out.println(BCrypt.checkpw(plainTextPassword.toString(),passwordInDatabase));
         return BCrypt.checkpw(plainTextPassword.toString(),passwordInDatabase);
     }
 }
